@@ -34,7 +34,7 @@ try {
 }
 
 app.get("/", (req, res) => {
-  res.send("Server is running🚀");
+  res.send("Jwellery server is running🚀");
 });
 
 // Category Schema
