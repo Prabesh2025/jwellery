@@ -4,6 +4,8 @@ import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
 const upload = multer({ dest: "uploads/" });
+import bcrypt, { hash } from "bcrypt";
+const saltRounds = 10;
 
 //Cloudinary configuration
 cloudinary.config({
@@ -510,6 +512,158 @@ app.delete("/api/products/:id", async (req, res) => {
     });
   }
 });
+
+
+//User Schema
+const userSchema = new mongoose.Schema({
+  fullName: { type:String, required: true},
+  userName: { type:String, required: true, unique: true },
+  email: { type:String, required: true, unique: true },  
+  phoneNumber: { type:String, required: true, unique: true },        
+  password: { type:String, required: true },
+  role: { type:String, required: true,},  // admin , user 
+});
+
+//User Table
+const userTable = mongoose.model("userTable", userSchema);
+//User Routes
+
+//1.Create/Register/Sign Up User
+app.post("/api/users/register", async (req, res)=> {
+  try {
+
+    // if email already exists
+    const userExistWithEmail = await userTable.findOne({ email: req.body.email });
+    if (userExistWithEmail) {
+      return res.status(409).json({
+        success: false,
+        msg: "User with this email already exists, please use a different email",
+        data: null,
+      });
+    }
+    // if username already exists
+    const userExistWithUserName = await userTable.findOne({ userName: req.body.userName });
+    if (userExistWithUserName) {
+      return res.status(409).json({
+        success: false,
+        msg: "User with this username already exists, please use a different username",
+        data: null,
+      });
+    }
+    // if phone number already exists
+    const userExistWithPhoneNumber = await userTable.findOne({ phoneNumber: req.body.phoneNumber });
+    if (userExistWithPhoneNumber) {
+      return res.status(409).json({
+        success: false,
+        msg: "User with this phone number already exists, please use a different phone number",
+        data: null,
+      });
+    }    
+
+
+
+    //To hash password  
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hashPassword = bcrypt.hashSync(req.body.password, salt);    
+
+    const newlycreatedUser = await userTable.create({...req.body, password: hashPassword});
+    return res.status(201).json({
+      success: true,
+      msg: "You have been register successfully",
+      data: newlycreatedUser,
+    });
+
+    
+  } catch (error) {
+    req.status(500).json({
+      success: false,
+      msg: "Something went wrong",
+      data: null,
+      error,
+    });
+  }
+});
+
+//2.Login /Signin User
+app.post("/api/users/login", async (req, res) => {});
+
+//3.Update User(also change password)
+app.patch("/api/users/:id", async (req, res) => {});
+
+//4.Delete User
+app.delete("/api/users/:id", async (req, res) => {
+  try {
+    const deletedUser = await userTable.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return res.status(404).json({
+        success: false,
+        msg: "User not found",
+        data: null,
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      msg: "User deleted successfully",
+      data: deletedUser,
+    });
+    
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: "Something went wrong",
+      data: null,
+      error,
+    });
+    
+  }
+}); 
+
+//5.Get all Users
+app.get("/api/users", async (req, res) => {
+  try {
+    const allUsers = await userTable.find();
+    return res.status(200).json({
+      success: true,
+      msg: "Get all users success",
+      data: allUsers,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: "Something went wrong",
+      data: null,
+      error,
+    });
+  }
+});
+
+//6.Get single User
+app.get("/api/users/:id", async (req, res) => {
+  try {
+    const singleUser = await userTable.findById(req.params.id);
+    if (!singleUser) {
+      return res.status(404).json({
+        success: false,
+        msg: "User not found",
+        data: null,
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      msg: "Get single user success",
+      data: singleUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: "Something went wrong",
+      data: null,
+      error,
+    });
+  }
+});
+
+
 
 app.listen(4000, () => {
   console.log("🚀Server is running on port 4000");
