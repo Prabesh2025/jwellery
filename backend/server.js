@@ -6,6 +6,7 @@ import multer from "multer";
 const upload = multer({ dest: "uploads/" });
 import bcrypt, { hash } from "bcrypt";
 const saltRounds = 10;
+import jwt from "jsonwebtoken";
 
 //Cloudinary configuration
 cloudinary.config({
@@ -349,15 +350,16 @@ const productTable = mongoose.model("productTable", productSchema);
 //Create
 app.post("/api/products", upload.single("imageUrl"), async (req, res) => {
   try {
-    const productAlreadyExist = await productTable.findOne({name:req.body.name});
-    if (productAlreadyExist){
+    const productAlreadyExist = await productTable.findOne({
+      name: req.body.name,
+    });
+    if (productAlreadyExist) {
       return res.status(409).json({
         success: false,
         msg: "Product with this name already exists, please use a different name",
         data: null,
       });
     }
-    
 
     //Upload image to Cloudinary
     const uploadResult = await cloudinary.uploader
@@ -437,13 +439,14 @@ app.get("/api/products/:id", async (req, res) => {
 });
 
 //Update
-app.patch("/api/products/:id",upload.single("imageUrl"), async (req, res) => {
+app.patch("/api/products/:id", upload.single("imageUrl"), async (req, res) => {
   try {
-
     //if user uploads a new image
     if (req.file) {
       //Upload image to Cloudinary
-      const uploadResult = await cloudinary.uploader.upload(req.file.path).catch((error) => {
+      const uploadResult = await cloudinary.uploader
+        .upload(req.file.path)
+        .catch((error) => {
           return res.status(500).json({
             success: false,
             msg: "Image upload failed",
@@ -452,7 +455,11 @@ app.patch("/api/products/:id",upload.single("imageUrl"), async (req, res) => {
           });
         });
 
-      const updatedProduct = await productTable.findByIdAndUpdate( req.params.id,{ ...req.body, imageUrl: uploadResult.secure_url }, { new: true });
+      const updatedProduct = await productTable.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body, imageUrl: uploadResult.secure_url },
+        { new: true }
+      );
       // If the product is not found, return a 404 error
       if (!updatedProduct) {
         return res.status(404).json({
@@ -470,13 +477,16 @@ app.patch("/api/products/:id",upload.single("imageUrl"), async (req, res) => {
     }
 
     //if user does not upload a new image
-    const updatedProduct = await productTable.findByIdAndUpdate( req.params.id, req.body, { new: true });    
-      return res.status(200).json({
+    const updatedProduct = await productTable.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    return res.status(200).json({
       success: true,
       msg: "Product updated successfully",
       data: updatedProduct,
     });
-
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -513,15 +523,14 @@ app.delete("/api/products/:id", async (req, res) => {
   }
 });
 
-
 //User Schema
 const userSchema = new mongoose.Schema({
-  fullName: { type:String, required: true},
-  userName: { type:String, required: true, unique: true },
-  email: { type:String, required: true, unique: true },  
-  phoneNumber: { type:String, required: true, unique: true },        
-  password: { type:String, required: true },
-  role: { type:String, required: true,},  // admin , user 
+  fullName: { type: String, required: true },
+  userName: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  phoneNumber: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, required: true }, // admin , user
 });
 
 //User Table
@@ -529,11 +538,12 @@ const userTable = mongoose.model("userTable", userSchema);
 //User Routes
 
 //1.Create/Register/Sign Up User
-app.post("/api/users/register", async (req, res)=> {
+app.post("/api/users/register", async (req, res) => {
   try {
-
     // if email already exists
-    const userExistWithEmail = await userTable.findOne({ email: req.body.email });
+    const userExistWithEmail = await userTable.findOne({
+      email: req.body.email,
+    });
     if (userExistWithEmail) {
       return res.status(409).json({
         success: false,
@@ -542,7 +552,9 @@ app.post("/api/users/register", async (req, res)=> {
       });
     }
     // if username already exists
-    const userExistWithUserName = await userTable.findOne({ userName: req.body.userName });
+    const userExistWithUserName = await userTable.findOne({
+      userName: req.body.userName,
+    });
     if (userExistWithUserName) {
       return res.status(409).json({
         success: false,
@@ -551,29 +563,27 @@ app.post("/api/users/register", async (req, res)=> {
       });
     }
     // if phone number already exists
-    const userExistWithPhoneNumber = await userTable.findOne({ phoneNumber: req.body.phoneNumber });
+    const userExistWithPhoneNumber = await userTable.findOne({
+      phoneNumber: req.body.phoneNumber,
+    });
     if (userExistWithPhoneNumber) {
       return res.status(409).json({
         success: false,
         msg: "User with this phone number already exists, please use a different phone number",
         data: null,
       });
-    }    
+    }
 
-
-
-    //To hash password  
+    //To hash password
     const salt = bcrypt.genSaltSync(saltRounds);
-    const hashPassword = bcrypt.hashSync(req.body.password, salt);    
+    const hashPassword = bcrypt.hashSync(req.body.password, salt);
 
-    const newlycreatedUser = await userTable.create({...req.body, password: hashPassword});
+    const newlycreatedUser = await userTable.create({...req.body, password: hashPassword, });
     return res.status(201).json({
       success: true,
       msg: "You have been register successfully",
       data: newlycreatedUser,
     });
-
-    
   } catch (error) {
     req.status(500).json({
       success: false,
@@ -585,10 +595,82 @@ app.post("/api/users/register", async (req, res)=> {
 });
 
 //2.Login /Signin User
-app.post("/api/users/login", async (req, res) => {});
+app.post("/api/users/login", async (req, res) => {
+  try {
+    
+    //Check if user exists with email
+    const userExist = await userTable.findOne({ email: req.body.email });
+    if (!userExist) {
+      return res.status(404).json({
+        success: false,
+        msg: "Please register before login",
+        data: null,
+      });
+    }
+    //Check if password is correct
+    const isPasswordMatch = bcrypt.compareSync(req.body.password, userExist.password);
+    if (!isPasswordMatch) {
+      return res.status(401).json({
+        success: false,
+        msg: "Incorrect password",
+        data: null,
+      });
+    }
+
+
+
+    //Token generate method
+   const myToken = jwt.sign({data: req.body.email,}, "hd709es", { expiresIn: "2h" });
+    return res.status(200).json({
+      success: true,
+      msg: "Login successful",
+      token: myToken,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: "Something went wrong",
+      data: null,
+      error,
+    });
+  }
+});
 
 //3.Update User(also change password)
-app.patch("/api/users/:id", async (req, res) => {});
+app.patch("/api/users/:id", async (req, res) => {
+  try {    
+    // if user wants to change password
+    if (req.body.password) {
+      const salt = bcrypt.genSaltSync(saltRounds);
+      req.body.password = bcrypt.hashSync(req.body.password, salt);
+    }
+
+    const updatedUser = await userTable.findByIdAndUpdate( req.params.id, req.body,{ new: true });
+    // If the user is not found, return a 404 error
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        msg: "User not found",
+        data: null,
+      });
+    }
+    
+    return res.status(200).json({
+      success: true,
+      msg: "User updated successfully",
+      data: updatedUser,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      msg: "Something went wrong",
+      data: null,
+      error,
+    });
+    
+  }
+});
 
 //4.Delete User
 app.delete("/api/users/:id", async (req, res) => {
@@ -606,7 +688,6 @@ app.delete("/api/users/:id", async (req, res) => {
       msg: "User deleted successfully",
       data: deletedUser,
     });
-    
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -614,9 +695,8 @@ app.delete("/api/users/:id", async (req, res) => {
       data: null,
       error,
     });
-    
   }
-}); 
+});
 
 //5.Get all Users
 app.get("/api/users", async (req, res) => {
@@ -662,8 +742,6 @@ app.get("/api/users/:id", async (req, res) => {
     });
   }
 });
-
-
 
 app.listen(4000, () => {
   console.log("🚀Server is running on port 4000");
