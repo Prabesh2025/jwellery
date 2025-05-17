@@ -578,7 +578,10 @@ app.post("/api/users/register", async (req, res) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashPassword = bcrypt.hashSync(req.body.password, salt);
 
-    const newlycreatedUser = await userTable.create({...req.body, password: hashPassword, });
+    const newlycreatedUser = await userTable.create({
+      ...req.body,
+      password: hashPassword,
+    });
     return res.status(201).json({
       success: true,
       msg: "You have been register successfully",
@@ -597,9 +600,8 @@ app.post("/api/users/register", async (req, res) => {
 //2.Login /Signin User
 app.post("/api/users/login", async (req, res) => {
   try {
-    
     //Check if user exists with email
-    const userExist = await userTable.findOne({ email: req.body.email });
+    const userExist = await userTable.findOne({ email: req.body.email});
     if (!userExist) {
       return res.status(404).json({
         success: false,
@@ -608,7 +610,10 @@ app.post("/api/users/login", async (req, res) => {
       });
     }
     //Check if password is correct
-    const isPasswordMatch = bcrypt.compareSync(req.body.password, userExist.password);
+    const isPasswordMatch = bcrypt.compareSync(
+      req.body.password,
+      userExist.password
+    );
     if (!isPasswordMatch) {
       return res.status(401).json({
         success: false,
@@ -617,10 +622,10 @@ app.post("/api/users/login", async (req, res) => {
       });
     }
 
-
-
     //Token generate method
-   const myToken = jwt.sign({data: req.body.email,}, "hd709es", { expiresIn: "2h" });
+    const myToken = jwt.sign({ data: req.body.email }, "hd709es", {
+      expiresIn: "2h",
+    });
     return res.status(200).json({
       success: true,
       msg: "Login successful",
@@ -638,14 +643,31 @@ app.post("/api/users/login", async (req, res) => {
 
 //3.Update User(also change password)
 app.patch("/api/users/:id", async (req, res) => {
-  try {    
+  try {
     // if user wants to change password
     if (req.body.password) {
+      //To hash password
       const salt = bcrypt.genSaltSync(saltRounds);
-      req.body.password = bcrypt.hashSync(req.body.password, salt);
-    }
+      const newHashedPassword = bcrypt.hashSync(req.body.password, salt);
 
-    const updatedUser = await userTable.findByIdAndUpdate( req.params.id, req.body,{ new: true });
+      const updatedUser = await userTable.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body, password: newHashedPassword },
+        { new: true }
+      );
+
+      return res.status(200).json({
+        success: true,
+        msg: "User updated successfully",
+        data: updatedUser,
+      });
+    }
+    // if user does not want to change password
+    const updatedUser = await userTable.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     // If the user is not found, return a 404 error
     if (!updatedUser) {
       return res.status(404).json({
@@ -655,12 +677,11 @@ app.patch("/api/users/:id", async (req, res) => {
       });
     }
     
-    return res.status(200).json({
+      return res.status(200).json({
       success: true,
       msg: "User updated successfully",
       data: updatedUser,
     });
-
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -668,7 +689,6 @@ app.patch("/api/users/:id", async (req, res) => {
       data: null,
       error,
     });
-    
   }
 });
 
