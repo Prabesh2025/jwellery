@@ -6,7 +6,7 @@ export default function page() {
     <div>
       <Link href={"/about"}>About</Link>
       <Link href={"/contact"}>Contact</Link>
-      <Link href={"/login"}>login</Link>
+      {/* <Link href={"/login"}>login</Link> */}
     </div>
   )
 }
