@@ -30,14 +30,20 @@ export default function CategorySection() {
 
   return (
     <div>
-
-        <p className="text-3xl font-medium mb-12 text-center">Explor Category</p>
-      {categories?.map((category: ICategory, index: number) => (
-        <div key={index}>
-          <Image src={category.imageUrl} height={200} width={400} alt="category-img" />
-          <p>{category.name}</p>
-        </div>
-      ))}
+      <p className="text-3xl font-medium mb-12 text-center">Explor Category</p>
+      <div className="w-10/12 mx-auto mt-20 grid grid-cols-4 items-center">
+        {categories?.map((category: ICategory, index: number) => (
+          <div key={index} className=" space-y-2">
+            <img
+              src={category.imageUrl}
+              alt="category-image"
+              width={300}
+              height={200}
+            />
+            <p className="text-center">{category.name}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

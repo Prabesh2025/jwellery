@@ -56,6 +56,7 @@ export default function page() {
 
         </Swiper>
       </>
+      
       <CategorySection/>
     </div>
   );
