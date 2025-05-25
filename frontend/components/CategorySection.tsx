@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
+// import Image from "next/image";
 
 interface ICategory {
   _id: string;
@@ -29,7 +29,7 @@ export default function CategorySection() {
   }, []);
 
   return (
-    <div>
+    <div className="mt-10">
       <p className="text-3xl font-medium mb-12 text-center">Explor Category</p>
       <div className="w-10/12 mx-auto mt-20 grid grid-cols-4 items-center">
         {categories?.map((category: ICategory, index: number) => (

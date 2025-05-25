@@ -119,7 +119,7 @@ export default function MarketoHeader() {
               <span className="text-xl font-semibold text-gray-900">All Categories</span>
             </div>
             <nav className="flex">
-              {["HOME", "ABOUT", "CONTACT", "PRODUCTS", "BLOG", "GALLERY"].map((item) => (
+              {["HOME", "ABOUT", "CONTACT", "PRODUCTS", "BLOG", "GALLERY","DASHBOARD"].map((item) => (
                 <Link
                   key={item}
                   href={`/${item.toLowerCase()}`}

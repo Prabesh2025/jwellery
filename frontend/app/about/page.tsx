@@ -2,15 +2,15 @@ import Image from "next/image"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200">
+      <div className="w-9/12 mx-auto px-4 py-16">
         {/* Hero Section */}
         <section className="mb-24 text-center">
           <div className="relative mx-auto mb-8 h-1 w-24 bg-gradient-to-r from-teal-500 to-blue-500"></div>
           <h1 className="mb-6 bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-5xl font-bold tracking-tight text-transparent md:text-6xl">
             About Our Company
           </h1>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-600">
             We're a passionate team dedicated to creating innovative solutions that help businesses thrive in the
             digital world.
           </p>
@@ -44,8 +44,8 @@ export default function AboutPage() {
         <section className="mb-24">
           <div className="mb-16 text-center">
             <div className="relative mx-auto mb-4 h-1 w-24 bg-gradient-to-r from-teal-500 to-blue-500"></div>
-            <h2 className="text-4xl font-bold text-gray-800 dark:text-white">Our Leadership Team</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">Our Leadership Team</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-500">
               Meet the talented individuals who drive our vision forward
             </p>
           </div>
