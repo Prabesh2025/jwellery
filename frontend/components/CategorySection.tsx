@@ -38,7 +38,8 @@ export default function CategorySection() {
               src={category.imageUrl}
               alt="category-image"
               width={300}
-              height={200}
+              height={150}
+              className="h-[300px] w-[300px] object-cover"
             />
             <p className="text-center">{category.name}</p>
           </div>

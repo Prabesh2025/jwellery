@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function page() {
   return (
-    <Link href="/home">
+    <Link href="/">
       
     </Link>
   )

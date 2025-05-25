@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react"; 
 import Link from "next/link";
 import {
   Search,
@@ -12,11 +12,18 @@ import {
   PinIcon as Pinterest,
   Heart,
   ShoppingBag,
+  ChevronDown,
   Menu,
 } from "lucide-react";
 
 export default function MarketoHeader() {
   const [searchQuery, setSearchQuery] = useState("");
+
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) return null; 
 
   return (
     <header className="">
@@ -26,16 +33,12 @@ export default function MarketoHeader() {
           <div className="flex items-center text-[13.5px] space-x-2">
             <div className="flex items-center space-x-2 opacity-95">
               <Truck size={18} />
-              <span className=" font-medium">
-                Free Delivery
-              </span>
+              <span className=" font-medium">Free Delivery</span>
             </div>
             <span className="opacity-90 font-extralight">|</span>
             <div className="flex items-center space-x-2 ml-1 opacity-95">
               <RefreshCw size={18} />
-              <span className=" font-medium ">
-                Returns Policy
-              </span>
+              <span className=" font-medium ">Returns Policy</span>
             </div>
 
             <span className="opacity-90 font-extralight">|</span>
@@ -111,23 +114,60 @@ export default function MarketoHeader() {
       </div>
 
       {/* Navigation */}
-      <div className="w-9/12 mx-auto border-t py-1 border-gray-200">
+      <div className="w-9/12 mx-auto border-t py-2 border-gray-200"> 
         <div className="container mx-auto px-4">
           <div className="flex items-center">
-            <div className="py-4 pr-8 flex items-center">
-              <Menu size={20} className="mr-2 text-gray-900" />
-              <span className="text-xl font-semibold text-gray-900">All Categories</span>
+            <div className="flex items-center mr-40"> 
+              <Menu className="w-5 h-5 mr-2" />
+              <span className="font-medium text-xl opacity-85">
+                All Categories
+              </span>
+              <ChevronDown className="w-4 h-4 ml-1 mt-1" />
             </div>
-            <nav className="flex">
-              {["HOME", "ABOUT", "CONTACT", "PRODUCTS", "BLOG", "GALLERY","DASHBOARD"].map((item) => (
-                <Link
-                  key={item}
-                  href={`/${item.toLowerCase()}`}
-                  className="py-4 px-6 text-sm text-gray-700 hover:text-gray-900 font-medium">
-                  {item}
-                </Link>
-              ))}
-            </nav>
+            <div className="hidden md:flex space-x-8">
+              <Link
+                href="/"
+                className="py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+              >
+                HOME
+              </Link>
+              <Link
+                href="/about"
+                className="py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+              >
+                ABOUT
+              </Link>
+              <Link
+                href="/contact"
+                className="py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+              >
+                CONTACT
+              </Link>
+              <Link
+                href="/products"
+                className="py-2 px-4 text-sm text-gray-700 hover:text-gray-900 font-medium"
+              >
+                PRODUCTS
+              </Link>
+              <Link
+                href="/blog"
+                className="py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+              >
+                BLOG
+              </Link>
+              <Link
+                href="/gallery"
+                className="py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+              >
+                GALLERY
+              </Link>
+              <Link
+                href="/dashboard"
+                className="py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+              >
+                DASHBOARD
+              </Link>
+            </div>
           </div>
         </div>
       </div>
