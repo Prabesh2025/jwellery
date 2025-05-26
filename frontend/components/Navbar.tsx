@@ -16,7 +16,7 @@ import {
   Menu,
 } from "lucide-react";
 
-export default function MarketoHeader() {
+export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const [hasMounted, setHasMounted] = useState(false);

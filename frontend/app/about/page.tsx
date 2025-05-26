@@ -1,4 +1,4 @@
-import Image from "next/image"
+import React from 'react';
 
 export default function AboutPage() {
   return (
@@ -11,7 +11,7 @@ export default function AboutPage() {
             About Our Company
           </h1>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-600">
-            We're a passionate team dedicated to creating innovative solutions that help businesses thrive in the
+            We&apos;re a passionate team dedicated to creating innovative solutions that help businesses thrive in the
             digital world.
           </p>
         </section>
@@ -31,7 +31,7 @@ export default function AboutPage() {
                   enjoyable to use.
                 </p>
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  Founded in 2020, we've been on a journey to transform how businesses interact with technology. Our
+                  Founded in 2020, we&apos;ve been on a journey to transform how businesses interact with technology. Our
                   team combines technical expertise with creative thinking to deliver exceptional results for our
                   clients.
                 </p>

@@ -1,188 +1,222 @@
-"use client"
-import React from 'react'
-export default function Component() {
+import React from 'react';
+import { Calendar, Clock, User, Heart, MessageCircle, Share2 } from "lucide-react"
+
+export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-blue-50 to-purple-50">
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-screen">
-        <div className="lg:grid lg:grid-cols-3 lg:gap-8">
-          {/* Blog Post Content */}
-          <div className="lg:col-span-2">
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden border-t-4 border-gradient-to-r from-purple-500 to-pink-500">
-              {/* Featured Image */}
-              <div className="aspect-video w-full">
-                <img
-                  src="/placeholder.svg?height=400&width=800"
-                  alt="Featured blog post image"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Article Content */}
-              <div className="p-6 sm:p-8">
-                {/* Category Badge */}
-                <div className="mb-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md">
-                    Technology
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Article Content */}
+          <article className="lg:col-span-2">
+            {/* Article Header */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 mb-8">
+              <div className="mb-6">
+                <span className="inline-block bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 text-sm font-medium px-4 py-2 rounded-full mb-4">
+                  Technology
+                </span>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-4 leading-tight">
                   The Future of Web Development: Trends to Watch in 2024
                 </h1>
+                <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+                  Exploring the latest technologies and methodologies that are shaping the future of web development and
+                  how they impact modern applications.
+                </p>
+              </div>
 
-                {/* Meta Information */}
-                <div className="flex items-center text-sm text-gray-600 mb-6">
-                  <div className="flex items-center">
-                    <img
-                      src="/placeholder.svg?height=40&width=40"
-                      alt="Author avatar"
-                      className="w-10 h-10 rounded-full mr-3"
-                    />
-                    <span className="font-medium text-gray-900">John Doe</span>
-                  </div>
-                  <span className="mx-2">•</span>
-                  <time dateTime="2024-01-15">January 15, 2024</time>
-                  <span className="mx-2">•</span>
+              {/* Article Meta */}
+              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-200">
+                <div className="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full">
+                  <User className="w-4 h-4 text-blue-600" />
+                  <span>John Doe</span>
+                </div>
+                <div className="flex items-center gap-2 bg-rose-50 px-3 py-1 rounded-full">
+                  <Calendar className="w-4 h-4 text-rose-600" />
+                  <span>March 15, 2024</span>
+                </div>
+                <div className="flex items-center gap-2 bg-purple-50 px-3 py-1 rounded-full">
+                  <Clock className="w-4 h-4 text-purple-600" />
                   <span>8 min read</span>
                 </div>
+              </div>
 
-                {/* Article Body */}
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-xl text-gray-700 mb-6 leading-relaxed">
-                    Web development continues to evolve at a rapid pace, with new technologies and frameworks emerging
-                    regularly. As we move through 2024, several key trends are shaping the future of how we build and
-                    interact with web applications.
-                  </p>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">1. Server-Side Rendering Renaissance</h2>
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    Server-side rendering (SSR) is making a strong comeback with frameworks like Next.js, Nuxt.js, and
-                    SvelteKit leading the charge. The benefits of improved SEO, faster initial page loads, and better
-                    user experience are driving this trend forward.
-                  </p>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">2. Edge Computing Integration</h2>
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    Edge computing is revolutionizing how we think about web application architecture. By processing
-                    data closer to users, we can achieve lower latency and improved performance across global
-                    applications.
-                  </p>
-
-                  <blockquote className="border-l-4 border-gradient-to-b from-orange-400 to-red-500 pl-6 my-8 italic text-gray-700 py-4 rounded-r-lg">
-                    "The future of web development lies in creating seamless experiences that blur the line between
-                    server and client, providing users with instant, responsive applications regardless of their
-                    location."
-                  </blockquote>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">3. AI-Powered Development Tools</h2>
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    Artificial intelligence is transforming the development process itself. From code completion and bug
-                    detection to automated testing and deployment, AI tools are becoming indispensable for modern
-                    developers.
-                  </p>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">4. WebAssembly Adoption</h2>
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    WebAssembly (WASM) is enabling high-performance applications in the browser, allowing developers to
-                    run code written in languages like Rust, C++, and Go at near-native speeds in web environments.
-                  </p>
-
-                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Conclusion</h2>
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    As we continue through 2024, these trends will shape how we approach web development. Staying
-                    informed and adapting to these changes will be crucial for developers looking to build the next
-                    generation of web applications.
-                  </p>
-                </div>
-
-                {/* Tags */}
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                  <div className="flex flex-wrap gap-2">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-sm">
-                      Web Development
-                    </span>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-sm">
-                      Technology Trends
-                    </span>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-sm">
-                      Frontend
-                    </span>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-sm">
-                      SSR
-                    </span>
-                  </div>
+              {/* Featured Image */}
+              <div className="mb-8">
+                <div className="relative overflow-hidden rounded-2xl">
+                  <img
+                    src="/placeholder.svg?height=400&width=800"
+                    alt="Web development trends"
+                    className="w-full h-64 sm:h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
               </div>
-            </article>
 
-            {/* Author Bio */}
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg shadow-lg p-6 mt-8 border border-indigo-200">
-              <div className="flex items-start">
-                <img
-                  src="/placeholder.svg?height=80&width=80"
-                  alt="Author avatar"
-                  className="w-20 h-20 rounded-full mr-4 ring-4 ring-purple-200"
-                />
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">John Doe</h3>
-                  <p className="text-gray-600 mb-3">
-                    Senior Full-Stack Developer with 8+ years of experience in modern web technologies. Passionate about
-                    creating efficient, scalable applications and sharing knowledge with the developer community.
-                  </p>
-                  <div className="flex space-x-4">
-                    <a href="#" className="text-blue-600 hover:text-blue-800 font-medium transition-colors">
-                      Twitter
-                    </a>
-                    <a href="#" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors">
-                      LinkedIn
-                    </a>
-                    <a href="#" className="text-purple-600 hover:text-purple-800 font-medium transition-colors">
-                      GitHub
-                    </a>
-                  </div>
+              {/* Article Body */}
+              <div className="prose prose-lg max-w-none">
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  The web development landscape is constantly evolving, with new technologies and frameworks emerging at
+                  a rapid pace. As we move through 2024, several key trends are reshaping how we build and deploy web
+                  applications.
+                </p>
+
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mt-8 mb-4">
+                  1. Server-Side Rendering Renaissance
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Server-side rendering (SSR) is making a strong comeback with frameworks like Next.js, Nuxt.js, and
+                  SvelteKit leading the charge. The benefits of improved SEO, faster initial page loads, and better user
+                  experience are driving this trend.
+                </p>
+
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent mt-8 mb-4">
+                  2. Edge Computing Integration
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Edge computing is revolutionizing how we think about web application deployment. By moving computation
+                  closer to users, we can achieve unprecedented performance improvements and reduced latency.
+                </p>
+
+                <blockquote className="border-l-4 border-gradient-to-b from-purple-400 to-pink-400 pl-6 my-8 italic text-gray-700  py-6 rounded-r-lg">
+                  &quot;The future of web development lies in creating seamless experiences that blur the line between
+                  server and client, providing users with instant, responsive applications.&quot;
+                </blockquote>
+
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mt-8 mb-4">
+                  3. AI-Powered Development Tools
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Artificial intelligence is transforming the development process itself. From code completion to
+                  automated testing, AI tools are becoming indispensable for modern developers.
+                </p>
+
+                <ul className="list-none pl-0 mb-6 text-gray-700 space-y-3">
+                  <li className="flex items-center gap-3 bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-lg">
+                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"></div>
+                    Intelligent code suggestions and auto-completion
+                  </li>
+                  <li className="flex items-center gap-3 bg-gradient-to-r from-purple-50 to-pink-50 p-3 rounded-lg">
+                    <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"></div>
+                    Automated bug detection and fixing
+                  </li>
+                  <li className="flex items-center gap-3 bg-gradient-to-r from-emerald-50 to-teal-50 p-3 rounded-lg">
+                    <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></div>
+                    Performance optimization recommendations
+                  </li>
+                  <li className="flex items-center gap-3 bg-gradient-to-r from-orange-50 to-amber-50 p-3 rounded-lg">
+                    <div className="w-2 h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full"></div>
+                    Accessibility compliance checking
+                  </li>
+                </ul>
+
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent mt-8 mb-4">
+                  Conclusion
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  As we continue through 2024, these trends will shape the future of web development. Staying informed
+                  and adapting to these changes will be crucial for developers who want to remain competitive in this
+                  rapidly evolving field.
+                </p>
+              </div>
+
+              {/* Article Actions */}
+              <div className="flex items-center justify-between pt-8 border-t border-gray-200">
+                <div className="flex items-center gap-4">
+                  <button className="flex items-center gap-2 text-gray-600 hover:text-rose-500 transition-all duration-300 bg-rose-50 hover:bg-rose-100 px-4 py-2 rounded-full">
+                    <Heart className="w-5 h-5" />
+                    <span className="font-medium">42</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-all duration-300 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-full">
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="font-medium">12</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-gray-600 hover:text-emerald-500 transition-all duration-300 bg-emerald-50 hover:bg-emerald-100 px-4 py-2 rounded-full">
+                    <Share2 className="w-5 h-5" />
+                    <span className="font-medium">Share</span>
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
+
+            {/* Author Bio */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8">
+              <div className="flex items-start gap-6">
+                <div className="relative">
+                  <img
+                    src="/placeholder.svg?height=80&width=80"
+                    alt="John Doe"
+                    className="w-20 h-20 rounded-full object-cover border-4 border-gradient-to-r from-purple-200 to-pink-200"
+                  />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400/20 to-pink-400/20"></div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-2">
+                    John Doe
+                  </h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    Senior Full-Stack Developer with 8+ years of experience in modern web technologies. Passionate about
+                    creating scalable applications and sharing knowledge with the developer community.
+                  </p>
+                  <button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
+                    Follow John →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
 
           {/* Sidebar */}
-          <div className="mt-8 lg:mt-0">
+          <aside className="lg:col-span-1">
             {/* Related Posts */}
-            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-lg shadow-lg p-6 mb-8 border border-cyan-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <span className="w-2 h-6 bg-gradient-to-b from-cyan-500 to-blue-600 rounded-full mr-3"></span>
-                Related Posts
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 mb-8">
+              <h3 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-6">
+                Related Articles
               </h3>
-              <div className="space-y-4">
-                <article className="border-b border-cyan-200 pb-4 hover:bg-white hover:p-3 hover:rounded-lg transition-all duration-200">
-                  <h4 className="font-medium text-gray-900 hover:text-cyan-600 cursor-pointer mb-1 transition-colors">
-                    Getting Started with Next.js 14
-                  </h4>
-                  <div className="text-sm text-gray-600">January 10, 2024 • 5 min read</div>
-                </article>
-
-                <article className="border-b border-cyan-200 pb-4 hover:bg-white hover:p-3 hover:rounded-lg transition-all duration-200">
-                  <h4 className="font-medium text-gray-900 hover:text-cyan-600 cursor-pointer mb-1 transition-colors">
-                    Building Responsive Layouts with Tailwind CSS
-                  </h4>
-                  <div className="text-sm text-gray-600">January 8, 2024 • 7 min read</div>
-                </article>
-
-                <article className="hover:bg-white hover:p-3 hover:rounded-lg transition-all duration-200">
-                  <h4 className="font-medium text-gray-900 hover:text-cyan-600 cursor-pointer mb-1 transition-colors">
-                    Modern JavaScript: ES2024 Features
-                  </h4>
-                  <div className="text-sm text-gray-600">January 5, 2024 • 6 min read</div>
-                </article>
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "Understanding React Server Components",
+                    date: "March 10, 2024",
+                    readTime: "5 min read",
+                    color: "from-blue-50 to-cyan-50",
+                    accent: "blue-500",
+                  },
+                  {
+                    title: "Building Scalable APIs with Node.js",
+                    date: "March 8, 2024",
+                    readTime: "7 min read",
+                    color: "from-purple-50 to-pink-50",
+                    accent: "purple-500",
+                  },
+                  {
+                    title: "CSS Grid vs Flexbox: When to Use What",
+                    date: "March 5, 2024",
+                    readTime: "6 min read",
+                    color: "from-emerald-50 to-teal-50",
+                    accent: "emerald-500",
+                  },
+                ].map((post, index) => (
+                  <article
+                    key={index}
+                    className={`group cursor-pointer bg-gradient-to-r ${post.color} p-4 rounded-xl hover:shadow-md transition-all duration-300`}
+                  >
+                    <h4
+                      className={`font-semibold text-gray-900 group-hover:text-${post.accent} transition-colors mb-2`}
+                    >
+                      {post.title}
+                    </h4>
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <span>{post.date}</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
 
             {/* Newsletter Signup */}
-            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg p-6 mb-8 border border-emerald-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center">
-                <span className="w-2 h-6 bg-gradient-to-b from-emerald-500 to-teal-600 rounded-full mr-3"></span>
+            <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 rounded-2xl p-6 mb-8 border border-white/20 shadow-lg">
+              <h3 className="text-xl font-bold bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text text-transparent mb-4">
                 Stay Updated
               </h3>
               <p className="text-gray-600 mb-4">Get the latest articles and insights delivered to your inbox.</p>
@@ -190,92 +224,43 @@ export default function Component() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-2 border border-emerald-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-transparent bg-white/80 backdrop-blur-sm transition-all duration-300"
                 />
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 px-4 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
                 >
                   Subscribe
                 </button>
               </form>
             </div>
 
-            {/* Categories */}
-            <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-lg shadow-lg p-6 border border-rose-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <span className="w-2 h-6 bg-gradient-to-b from-rose-500 to-pink-600 rounded-full mr-3"></span>
-                Categories
+            {/* Popular Tags */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-6">
+                Popular Tags
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center hover:bg-white hover:p-2 hover:rounded-lg transition-all duration-200">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-rose-600 font-medium transition-colors flex items-center"
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { name: "React", color: "from-blue-400 to-cyan-400" },
+                  { name: "Next.js", color: "from-purple-400 to-pink-400" },
+                  { name: "TypeScript", color: "from-emerald-400 to-teal-400" },
+                  { name: "Node.js", color: "from-orange-400 to-amber-400" },
+                  { name: "CSS", color: "from-rose-400 to-pink-400" },
+                  { name: "JavaScript", color: "from-indigo-400 to-blue-400" },
+                  { name: "Web Development", color: "from-violet-400 to-purple-400" },
+                  { name: "Frontend", color: "from-cyan-400 to-blue-400" },
+                ].map((tag) => (
+                  <span
+                    key={tag.name}
+                    className={`bg-gradient-to-r ${tag.color} text-white px-4 py-2 rounded-full text-sm hover:shadow-lg cursor-pointer transition-all duration-300 transform hover:scale-105`}
                   >
-                    <span className="w-3 h-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full mr-2"></span>
-                    Web Development
-                  </a>
-                  <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">(24)</span>
-                </div>
-
-                <div className="flex justify-between items-center hover:bg-white hover:p-2 hover:rounded-lg transition-all duration-200">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-rose-600 font-medium transition-colors flex items-center"
-                  >
-                    <span className="w-3 h-3 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full mr-2"></span>
-                    JavaScript
-                  </a>
-                  <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">(18)</span>
-                </div>
-
-                <div className="flex justify-between items-center hover:bg-white hover:p-2 hover:rounded-lg transition-all duration-200">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-rose-600 font-medium transition-colors flex items-center"
-                  >
-                    <span className="w-3 h-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full mr-2"></span>
-                    React
-                  </a>
-                  <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">(15)</span>
-                </div>
-
-                <div className="flex justify-between items-center hover:bg-white hover:p-2 hover:rounded-lg transition-all duration-200">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-rose-600 font-medium transition-colors flex items-center"
-                  >
-                    <span className="w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full mr-2"></span>
-                    CSS
-                  </a>
-                  <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">(12)</span>
-                </div>
-
-                <div className="flex justify-between items-center hover:bg-white hover:p-2 hover:rounded-lg transition-all duration-200">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-rose-600 font-medium transition-colors flex items-center"
-                  >
-                    <span className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full mr-2"></span>
-                    Node.js
-                  </a>
-                  <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">(9)</span>
-                </div>
-
-                <div className="flex justify-between items-center hover:bg-white hover:p-2 hover:rounded-lg transition-all duration-200">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-rose-600 font-medium transition-colors flex items-center"
-                  >
-                    <span className="w-3 h-3 bg-gradient-to-r from-rose-500 to-red-600 rounded-full mr-2"></span>
-                    Design
-                  </a>
-                  <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">(7)</span>
-                </div>
+                    {tag.name}
+                  </span>
+                ))}
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </main>
     </div>
