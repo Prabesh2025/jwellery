@@ -34,7 +34,7 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="w-9/10 mx-auto mt-10">
+    <div className="w-9/10 mx-auto mt-10 bg-gradient-to-b  rounded-md py-10 px-4">
       <div className="w-9/10 mx-auto flex justify-center">
         <Swiper
           pagination={{

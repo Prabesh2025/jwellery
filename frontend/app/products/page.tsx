@@ -35,7 +35,7 @@ export default function ProductsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 py-10">
       {/* Header */}
       <header className="bg-gradient-to-r from-gray-50 to-white shadow-md">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -142,18 +142,18 @@ export default function ProductsPage() {
       </div>
 
       {/* Products Section */}
-        <div className="w-9/10 mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6 p-4">
+        <div className="w-9/10 mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6 p-4 bg-gray-100 shadow-lg rounded-md">
             
             {
               products?.map((product: IProduct, index: number) => (
 
-                 <div key={index} >
+                 <div key={index} className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg p-6 shadow-lg border border-gray-600 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-gray-600 hover:to-gray-700">
                   <Image src={product.imageUrl} height={300} width={300} alt="product-img" className="h-[300px] w-[300px] object-cover"/>
-                  <p>{product.name}</p>
-                  <p>{product.description}</p>
-                  <p>{product.previousPrice}</p>
-                  <p>{product.currentPrice}</p>
-                  <p>{product.rating}</p>
+                  <h2 className="text-xl font-semibold text-gray-200 mt-2">{product.name}</h2>
+                  <p className="text-gray-300">{product.description}</p>
+                  <p className="text-gray-300 line-through">{product.previousPrice}</p>
+                  <p className="text-green-500 font-bold">{product.currentPrice}</p>
+                  <p className="text-yellow-500">Rating: {product.rating} ⭐</p>                 
                 </div>
 
               ))
